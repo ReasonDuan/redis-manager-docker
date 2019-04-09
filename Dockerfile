@@ -1,6 +1,6 @@
 FROM maven:3.6.0-jdk-8-alpine
 
-RUN apk add --no-cache unzip git
+RUN apk add --no-cache unzip
 
 ARG SERVICE_DIR=/usr/share/redis-manager
 ARG REMOTE_URL=https://github.com/ngbdf/redis-manager/archive/redismanager-1.1-release.zip
