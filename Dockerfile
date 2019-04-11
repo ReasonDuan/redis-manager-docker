@@ -14,7 +14,7 @@ RUN curl -fsSL -o /tmp/redis-manager.zip ${REMOTE_URL} \
   && cp -f /tmp/redis-manager/target/redis-manager*.jar ${SERVICE_DIR} \
   && cp -rf /tmp/redis-manager/target/lib/* ${SERVICE_DIR}/lib \
   && cp -rf /tmp/redis-manager/target/classes/* ${SERVICE_DIR}/web \
-  && cp ${SERVICE_DIR}/web/application.yml ${SERVICE_DIR}/web/application.yml.base \
+  && mv ${SERVICE_DIR}/web/application.yml ${SERVICE_DIR}/web/application.yml.base \
   && rm -rf /tmp/redis-manager*
   
 COPY redis-manager-start.sh ${SERVICE_DIR}/
