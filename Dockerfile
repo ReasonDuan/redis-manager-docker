@@ -6,7 +6,7 @@ ARG SERVICE_DIR=/usr/share/redis-manager
 ARG REMOTE_URL=https://github.com/ngbdf/redis-manager/releases/download/redis-manager-2.0.0-release/redis-manager-2.0.0.tar.gz
 WORKDIR ${SERVICE_DIR}
 RUN curl -fsSL -o redis-manager.tar.gz ${REMOTE_URL} \
-  && tar -xvf redis-manager.tar.gz \
+  && tar -xf redis-manager.tar.gz \
   && mv redis-manager/* ./ \
   && cp conf/application.yml conf/application.yml.backup \
   && cp -r data backup_data \

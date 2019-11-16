@@ -14,9 +14,9 @@ if [ "`ls -A data`" = ""]; then
   echo "The data dir is empty."
   cp -r backup_data/* data
 fi
-
+echo "Add class path."
 # start redis manager
-CLASSPATH=conf/:
+CLASSPATH=./:conf/
 for i in lib/*.jar; do
         CLASSPATH=${CLASSPATH}:$i
 done
