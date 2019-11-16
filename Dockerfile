@@ -1,23 +1,15 @@
-FROM maven:3.6.0-jdk-8-alpine
-
-RUN apk add --no-cache unzip
+FROM openjdk:8u181-jdk-alpine3.8
 
 ARG SERVICE_DIR=/usr/share/redis-manager
-ARG REMOTE_URL=https://github.com/ngbdf/redis-manager/archive/redismanager-1.1-release.zip
-
-RUN curl -fsSL -o /tmp/redis-manager.zip ${REMOTE_URL} \
-  && unzip /tmp/redis-manager.zip -d /tmp \
-  && rm -f /tmp/redis-manager.zip && mv /tmp/redis-manager* /tmp/redis-manager \
-  && mvn clean package -Dmaven.test.skip=true -f /tmp/redis-manager \
-  && mkdir ${SERVICE_DIR} && mkdir ${SERVICE_DIR}/logs && mkdir ${SERVICE_DIR}/web \
-  && mkdir ${SERVICE_DIR}/conf && mkdir ${SERVICE_DIR}/lib \
-  && cp -f /tmp/redis-manager/target/redis-manager*.jar ${SERVICE_DIR} \
-  && cp -rf /tmp/redis-manager/target/lib/* ${SERVICE_DIR}/lib \
-  && cp -rf /tmp/redis-manager/target/classes/* ${SERVICE_DIR}/web \
-  && mv ${SERVICE_DIR}/web/application.yml ${SERVICE_DIR}/web/application.yml.base \
-  && rm -rf /tmp/redis-manager*
+ARG REMOTE_URL=https://github.com/ngbdf/redis-manager/releases/download/redis-manager-2.0.0-release/redis-manager-2.0.0.tar.gz
+WORKDIR ${SERVICE_DIR}
+RUN curl -fsSL -o redis-manager.tar.gz ${REMOTE_URL} \
+  && tar -xvf redis-manager.tar.gz \
+  && mv redis-manager/* ./ \
+  && cp conf/application.yml conf/application.yml.backup \
+  && cp -r data backup_data \
+  && rm -f redis-manager.tar.gz && rm -rf redis-manager 
   
 COPY redis-manager-start.sh ${SERVICE_DIR}/
 
-WORKDIR ${SERVICE_DIR}
 ENTRYPOINT ["sh","./redis-manager-start.sh"]
