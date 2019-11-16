@@ -1,5 +1,7 @@
 FROM openjdk:8u181-jdk-alpine3.8
 
+RUN apk add --update curl 
+
 ARG SERVICE_DIR=/usr/share/redis-manager
 ARG REMOTE_URL=https://github.com/ngbdf/redis-manager/releases/download/redis-manager-2.0.0-release/redis-manager-2.0.0.tar.gz
 WORKDIR ${SERVICE_DIR}
