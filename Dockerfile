@@ -10,9 +10,10 @@ RUN curl -fsSL -o redis-manager.tar.gz ${REMOTE_URL} \
   && mv redis-manager/* ./ \
   && cp conf/application.yml conf/application.yml.backup \
   && cp -r data backup_data \
-  && cp -f log4j2.xml conf/ \
+  && rm -f conf/log4j2.xml \
   && rm -f redis-manager.tar.gz && rm -rf redis-manager 
   
 COPY redis-manager-start.sh ${SERVICE_DIR}/
+COPY log4j2.xml ${SERVICE_DIR}/conf/
 
 ENTRYPOINT ["sh","./redis-manager-start.sh"]
