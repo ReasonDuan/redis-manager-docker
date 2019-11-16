@@ -11,7 +11,7 @@
 ```sh
 $sudo docker run -d --net=host --name redis-manager  \
 -e DATASOURCE_DATABASE='redis_manager' \
--e DATASOURCE_URL='jdbc:mysql://127.0.0.1:3306/redis_manager?useUnicode=true&characterEncoding=utf-8' \
+-e DATASOURCE_URL='jdbc:mysql://127.0.0.1:3306/redis_manager?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8' \
 -e DATASOURCE_USERNAME='root' \
 -e DATASOURCE_PASSWORD='******' \
 reasonduan/redis-manager
