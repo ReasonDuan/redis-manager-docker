@@ -21,7 +21,7 @@ reasonduan/redis-manager
 
 ```sh
 $sudo docker run -d --net=host --name redis-manager  \
--v /opt/app/redis-manager-test/conf/application.yml:/usr/share/redis-manager/conf/application.yml \
+-v /opt/app/redis-manager/conf/application.yml:/usr/local/redis-manager/conf/application.yml \
 reasonduan/redis-manager
 ```
 
